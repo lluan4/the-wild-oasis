@@ -1,12 +1,13 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-const NavList = styled.ul`
+export const NavList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
 `;
 
-const Link = styled.a`
+export const Link = styled(NavLink)`
   &:link,
   &:visited {
     display: flex;

@@ -5,6 +5,19 @@ interface ButtonStyledProps {
   sizes?: keyof typeof sizes;
 }
 
+export const Button = styled.button<ButtonStyledProps>`
+  border: none;
+  border-radius: ${(props) => props.theme.borderRadius.sm};
+  box-shadow: ${(props) => props.theme.shadows.sm};
+  ${(props) => sizes[props.sizes!]};
+  ${(props) => variations[props.variant!]};
+`;
+
+Button.defaultProps = {
+  variant: "primary",
+  sizes: "medium",
+};
+
 const sizes = {
   small: css`
     font-size: 1.2rem;
@@ -52,20 +65,3 @@ const variations = {
     }
   `,
 };
-
-const Button = styled.button<ButtonStyledProps>`
-  border: none;
-  border-radius: ${(props) => props.theme.borderRadius.sm};
-  box-shadow: ${(props) => props.theme.shadows.sm};
-  ${(props) => sizes[props.sizes!]};
-  ${(props) => variations[props.variant!]};
-`;
-
-Button.defaultProps = {
-  variant: "primary",
-  sizes: "medium",
-};
-
-
-
-export default Button;

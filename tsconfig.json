@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src","src/@types/declarations.d.ts"],
+  "include": ["src", "src/data/data-bookings.js", "src/data/data-cabins.js", "src/data/data-guests.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
