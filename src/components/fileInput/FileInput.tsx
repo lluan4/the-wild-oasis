@@ -4,7 +4,7 @@ import { forwardRef } from "react";
 
 const FileInput = forwardRef<HTMLInputElement, FileInputProps>(
   (props: FileInputProps, ref) => {
-    return <S.FileInput ref={ref} {...props}></S.FileInput>;
+    return <S.FileInput ref={ref} type="file" {...props}></S.FileInput>;
   }
 );
 

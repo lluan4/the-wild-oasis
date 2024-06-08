@@ -1,4 +1,4 @@
-import Heading from "../ui/heading/Heading";
+import Heading from "../components/heading/Heading";
 
 function Settings() {
   return <Heading as="h1">Update hotel settings</Heading>;

@@ -1,14 +1,6 @@
 import styled, { css } from "styled-components";
 
-interface HeadingProps
-  extends React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLHeadingElement>,
-    HTMLHeadingElement
-  > {
-  as?: string;
-}
-
-const Heading = styled.h1<HeadingProps>`
+export const Heading = styled.h1`
   ${(props) =>
     props.as === "h1" &&
     css`
@@ -30,5 +22,3 @@ const Heading = styled.h1<HeadingProps>`
 
   line-height: 1.4;
 `;
-
-export default Heading;

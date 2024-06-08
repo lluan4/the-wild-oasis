@@ -1,13 +1,14 @@
 import { useState } from "react";
 
 import CabinTable from "../features/cabins/table/CabinTable";
-import Button from "../ui/button/Button";
-import Heading from "../ui/heading/Heading";
+import Button from "../components/button/Button";
+import Heading from "../components/heading/Heading";
 import Row from "../ui/Row";
 import CreateCabinForm from "../features/cabins/createCabin/CreateCabinForm";
 
 function Cabins() {
   const [showForm, setShowForm] = useState(false);
+
   return (
     <>
       <Row type="horizontal">

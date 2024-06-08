@@ -1,4 +1,4 @@
-import Heading from "../ui/heading/Heading";
+import Heading from "../components/heading/Heading";
 import Row from "../ui/Row";
 
 function Bookings() {

@@ -8,7 +8,7 @@ import Settings from "../pages/Settings";
 import Account from "../pages/Account";
 import Login from "../pages/Login";
 import PageNotFound from "../pages/PageNotFound";
-import AppLayout from "../ui/appLayout/AppLayout";
+import AppLayout from "../components/appLayout/AppLayout";
 
 function AppRouter() {
   return (

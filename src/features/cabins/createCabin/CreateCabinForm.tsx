@@ -1,77 +1,120 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import * as S from "./CreateCabinForm.styles";
+import Input from "../../../components/input/Input";
+import Form from "../../../components/form/Form";
+import Button from "../../../components/button/Button";
+import Textarea from "../../../components/textArea/Textarea";
+import FileInput from "../../../components/fileInput/FileInput";
 
-import Input from "../../../ui/input/Input";
-import Form from "../../../ui/form/Form";
-import Button from "../../../ui/button/Button";
-import Textarea from "../../../ui/textArea/Textarea";
-import FileInput from "../../../ui/fileInput/FileInput";
-
-import { useForm } from "react-hook-form";
+import { FieldErrors, useForm } from "react-hook-form";
 import { useCabins } from "../../../hooks/useCabins";
 import { ICreateCabin } from "../../../interfaces/cabin/ICreateCabin";
+import FormRow from "../../../components/form/formRow/FormRow";
 
 function CreateCabinForm() {
-  const { register, handleSubmit, reset } = useForm<ICreateCabin>();
-  const { useCreateCabins } = useCabins();
+  const { useCreateCabins, useGetAllCabins } = useCabins();
+  const { register, handleSubmit, reset, getValues, formState } =
+    useForm<ICreateCabin>();
+
+  const { data: cabins } = useGetAllCabins();
+  const { errors } = formState;
   const { isPending, mutate } = useCreateCabins();
 
-  const onSubmit = async (form: ICreateCabin) => {
-    const obj: ICreateCabin = {
-      ...form,
-    };
-    mutate(obj, { onSuccess: () => reset() });
-  };
+  function onSubmit(form: ICreateCabin) {
+    console.log(form);
+    mutate(form);
+  }
+
+  function onError(error: FieldErrors<ICreateCabin>) {
+    console.log(error);
+  }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <S.FormRow>
-        <S.Label htmlFor="name">Cabin name</S.Label>
-        <Input type="text" id="name" {...register("name")} />
-      </S.FormRow>
+    <Form onSubmit={handleSubmit(onSubmit, onError)}>
+      <FormRow label="Cabin Name" error={errors?.name?.message}>
+        <Input
+          type="text"
+          id="name"
+          disabled={isPending}
+          {...register("name", {
+            required: "This field is required",
+            validate: (value) =>
+              !cabins?.some((cabin) => cabin.name === value) ||
+              "Cabin name already exists",
+          })}
+        />
+      </FormRow>
 
-      <S.FormRow>
-        <S.Label htmlFor="maxCapacity">Maximum capacity</S.Label>
-        <Input type="number" id="maxCapacity" {...register("maxCapacity")} />
-      </S.FormRow>
+      <FormRow label="Maximum capacity" error={errors?.maxCapacity?.message}>
+        <Input
+          type="number"
+          id="maxCapacity"
+          disabled={isPending}
+          {...register("maxCapacity", {
+            required: "This field is required",
+            min: { value: 1, message: "Capacity should be at least 1" },
+          })}
+        />
+      </FormRow>
 
-      <S.FormRow>
-        <S.Label htmlFor="regularPrice">Regular price</S.Label>
-        <Input type="number" id="regularPrice" {...register("regularPrice")} />
-      </S.FormRow>
+      <FormRow label="Regular price" error={errors?.regularPrice?.message}>
+        <Input
+          type="number"
+          id="regularPrice"
+          disabled={isPending}
+          {...register("regularPrice", {
+            required: "This field is required",
+            min: { value: 1, message: "Capacity should be at least 1" },
+          })}
+        />
+      </FormRow>
 
-      <S.FormRow>
-        <S.Label htmlFor="discount">Discount</S.Label>
+      <FormRow label="Discount" error={errors?.discount?.message}>
         <Input
           type="number"
           id="discount"
+          disabled={isPending}
           defaultValue={0}
-          {...register("discount")}
+          {...register("discount", {
+            required: "This field is required",
+            validate: (value) =>
+              Number(value) <= Number(getValues().regularPrice) ||
+              "Discount should be less than the regular price",
+          })}
         />
-      </S.FormRow>
+      </FormRow>
 
-      <S.FormRow>
-        <S.Label htmlFor="description">Description for website</S.Label>
+      <FormRow
+        label="Description for website"
+        error={errors?.description?.message}
+      >
         <Textarea
           type="number"
           id="description"
+          disabled={isPending}
           defaultValue=""
-          {...register("description")}
+          {...register("description", { required: "This field is required" })}
         />
-      </S.FormRow>
+      </FormRow>
 
-      <S.FormRow>
-        <S.Label htmlFor="image">Cabin photo</S.Label>
-        <FileInput id="image" accept="image/*" {...register("image")} />
-      </S.FormRow>
+      <FormRow label="Cabin photo" error={errors?.image?.message}>
+        <FileInput
+          id="image"
+          disabled={isPending}
+          accept="image/*"
+          {...register("image", {
+            required: "This field is required",
+          })}
+          // onChange={handleFileChange}
+        />
+      </FormRow>
 
-      <S.FormRow>
-        {/* type is an HTML attribute! */}
-        <Button $variation="secondary" type="reset">
-          Cancel
-        </Button>
-        <Button disabled={isPending}>Add Cabin</Button>
-      </S.FormRow>
+      <FormRow>
+        <>
+          <Button disabled={isPending} $variation="secondary" type="reset">
+            Cancel
+          </Button>
+          <Button disabled={isPending}>Add Cabin</Button>
+        </>
+      </FormRow>
     </Form>
   );
 }

@@ -1,5 +1,5 @@
 import * as S from "./CabinTable.styles";
-import Spinner from "../../../ui/spinner/Spinner";
+import Spinner from "../../../components/spinner/Spinner";
 import CabinRow from "./CabinRow";
 import { useCabins } from "../../../hooks/useCabins";
 

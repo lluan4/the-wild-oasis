@@ -21,10 +21,20 @@ export async function DeleteCabin(id: number) {
   }
 }
 export async function CreateCabin(form: ICreateCabin) {
-  const { data, error } = await supabase.from("cabins").insert([form]).select();
-  if (error) {
-    console.error(error);
-    throw new Error("Cabins could not be created");
-  }
-  return data;
+  // https://beubesxdvxybcyjkfemt.supabase.co/storage/v1/object/public/cabins-images/cabin-001.jpg
+
+  // const imageName = `${Math.random()}-${form.image?.item.}.jpg`;
+
+  // const obj = {
+  //   ...form,
+  //   image: form.image?.at(0),
+  // };
+  console.log(form);
+
+  // const { data, error } = await supabase.from("cabins").insert([form]).select();
+  // if (error) {
+  //   console.error(error);
+  //   throw new Error("Cabins could not be created");
+  // }
+  // return data;
 }
