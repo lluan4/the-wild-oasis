@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import Header from "../Header/Header";
-import SideBar from "../SideBar/SideBar";
+import Header from "../header/Header";
+import SideBar from "../sideBar/SideBar";
 import * as S from "./AppLayout.styles";
 
 function AppLayout() {
@@ -9,7 +9,9 @@ function AppLayout() {
       <Header />
       <SideBar />
       <S.Main>
-        <Outlet />
+        <S.Container>
+          <Outlet />
+        </S.Container>
       </S.Main>
     </S.AppLayout>
   );

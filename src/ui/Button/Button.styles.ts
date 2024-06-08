@@ -1,24 +1,20 @@
 import styled, { css } from "styled-components";
+import { StyledButtonProps } from "./Button.types";
 
-interface ButtonStyledProps {
-  variant?: keyof typeof variations;
-  sizes?: keyof typeof sizes;
-}
-
-export const Button = styled.button<ButtonStyledProps>`
+export const Button = styled.button<StyledButtonProps>`
   border: none;
   border-radius: ${(props) => props.theme.borderRadius.sm};
   box-shadow: ${(props) => props.theme.shadows.sm};
-  ${(props) => sizes[props.sizes!]};
-  ${(props) => variations[props.variant!]};
+  ${(props) => sizes[props.$sizes!]};
+  ${(props) => variations[props.$variation!]};
 `;
 
 Button.defaultProps = {
-  variant: "primary",
-  sizes: "medium",
+  $variation: "primary",
+  $sizes: "medium",
 };
 
-const sizes = {
+export const sizes = {
   small: css`
     font-size: 1.2rem;
     padding: 0.4rem 0.8rem;
@@ -38,7 +34,7 @@ const sizes = {
   `,
 };
 
-const variations = {
+export const variations = {
   primary: css`
     color: var(--color-brand-50);
     background-color: var(--color-brand-600);
