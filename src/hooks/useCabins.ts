@@ -3,6 +3,7 @@ import {
   CreateCabin,
   DeleteCabin,
   GetAllCabins,
+  UpdateCabin,
 } from "../services/cabins/apiCabins";
 import toast from "react-hot-toast";
 
@@ -12,6 +13,22 @@ export function useCabins() {
   function useCreateCabins() {
     const result = useMutation({
       mutationFn: CreateCabin,
+      onSuccess: () => {
+        toast.success("Cabin successfully created");
+        queryClient.invalidateQueries({
+          queryKey: ["cabins"],
+        });
+      },
+      onError: (error) => {
+        toast(error.message);
+      },
+    });
+    return result;
+  }
+
+  function useUpdateCabins() {
+    const result = useMutation({
+      mutationFn: UpdateCabin,
       onSuccess: () => {
         toast.success("Cabin successfully created");
         queryClient.invalidateQueries({
@@ -49,5 +66,5 @@ export function useCabins() {
     return result;
   }
 
-  return { useDeleteCabins, useGetAllCabins, useCreateCabins };
+  return { useDeleteCabins, useGetAllCabins, useCreateCabins, useUpdateCabins };
 }

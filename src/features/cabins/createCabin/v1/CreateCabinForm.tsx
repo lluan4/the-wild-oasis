@@ -1,7 +1,6 @@
 import { FieldErrors, useForm } from "react-hook-form";
 import { useCabins } from "../../../hooks/useCabins";
-import { ICreateAndUpdateCabin } from "../../../services/cabins/apiCabins.interfaces";
-import { ICreateCabinsFormProps } from "./CreateCabinForm.interface";
+import { ICreateCabin } from "../../../services/cabins/apiCabins.interfaces";
 
 import Input from "../../../components/input/Input";
 import Form from "../../../components/form/Form";
@@ -10,45 +9,24 @@ import Textarea from "../../../components/textArea/Textarea";
 import FileInput from "../../../components/fileInput/FileInput";
 import FormRow from "../../../components/form/formRow/FormRow";
 
-function CreateCabinForm({ cabinToEdit = {} }: ICreateCabinsFormProps) {
-  const { id: editID, ...editValues } = cabinToEdit;
-  const isEditingSession = Boolean(editID);
-
-  const { useCreateCabins, useGetAllCabins, useUpdateCabins } = useCabins();
+function CreateCabinForm() {
+  const { useCreateCabins, useGetAllCabins } = useCabins();
   const { data: cabins } = useGetAllCabins();
-  const { isPending: pendingCreate, mutate: CreateCabin } = useCreateCabins();
-  const { isPending: pedingUpdate, mutate: UpdateCabin } = useUpdateCabins();
-
-  const defaultValues: ICreateAndUpdateCabin | Record<string, never> =
-    isEditingSession
-      ? {
-          discount: Number(editValues.name),
-          maxCapacity: Number(editValues.maxCapacity),
-          regularPrice: Number(editValues.regularPrice),
-          name: editValues.name,
-          description: editValues.description,
-          image: editValues.image,
-        }
-      : {};
-  console.log(defaultValues);
+  const { isPending, mutate } = useCreateCabins();
   const { register, handleSubmit, reset, getValues, formState } =
-    useForm<ICreateAndUpdateCabin>({
-      defaultValues: defaultValues,
-    });
-
+    useForm<ICreateCabin>();
   const { errors } = formState;
 
-  function onSubmit(form: ICreateAndUpdateCabin) {
-    !isEditingSession
-      ? CreateCabin(form, {
-          onSuccess: () => {
-            reset;
-          },
-        })
-      : UpdateCabin(form);
+  function onSubmit(form: ICreateCabin) {
+    console.log(form);
+    mutate(form, {
+      onSuccess: () => {
+        reset;
+      },
+    });
   }
 
-  function onError(error: FieldErrors<ICreateAndUpdateCabin>) {
+  function onError(error: FieldErrors<ICreateCabin>) {
     console.log(error);
   }
 
@@ -58,12 +36,11 @@ function CreateCabinForm({ cabinToEdit = {} }: ICreateCabinsFormProps) {
         <Input
           type="text"
           id="name"
-          disabled={pendingCreate}
+          disabled={isPending}
           {...register("name", {
             required: "This field is required",
             validate: (value) =>
               !cabins?.some((cabin) => cabin.name === value) ||
-              isEditingSession ||
               "Cabin name already exists",
           })}
         />
@@ -73,7 +50,7 @@ function CreateCabinForm({ cabinToEdit = {} }: ICreateCabinsFormProps) {
         <Input
           type="number"
           id="maxCapacity"
-          disabled={pendingCreate}
+          disabled={isPending}
           {...register("maxCapacity", {
             required: "This field is required",
             min: { value: 1, message: "Capacity should be at least 1" },
@@ -85,7 +62,7 @@ function CreateCabinForm({ cabinToEdit = {} }: ICreateCabinsFormProps) {
         <Input
           type="number"
           id="regularPrice"
-          disabled={pendingCreate}
+          disabled={isPending}
           {...register("regularPrice", {
             required: "This field is required",
             min: { value: 1, message: "Capacity should be at least 1" },
@@ -97,7 +74,7 @@ function CreateCabinForm({ cabinToEdit = {} }: ICreateCabinsFormProps) {
         <Input
           type="number"
           id="discount"
-          disabled={pendingCreate || pedingUpdate}
+          disabled={isPending}
           defaultValue={0}
           {...register("discount", {
             required: "This field is required",
@@ -115,7 +92,7 @@ function CreateCabinForm({ cabinToEdit = {} }: ICreateCabinsFormProps) {
         <Textarea
           type="number"
           id="description"
-          disabled={pendingCreate || pedingUpdate}
+          disabled={isPending}
           defaultValue=""
           {...register("description", { required: "This field is required" })}
         />
@@ -124,26 +101,21 @@ function CreateCabinForm({ cabinToEdit = {} }: ICreateCabinsFormProps) {
       <FormRow label="Cabin photo" error={errors?.image?.message}>
         <FileInput
           id="image"
-          disabled={pendingCreate || pedingUpdate}
+          disabled={isPending}
           accept="image/*"
           {...register("image", {
-            required: isEditingSession ? false : "This field is required",
+            required: "This field is required",
           })}
+          // onChange={handleFileChange}
         />
       </FormRow>
 
       <FormRow>
         <>
-          <Button
-            disabled={pendingCreate || pedingUpdate}
-            $variation="secondary"
-            type="reset"
-          >
+          <Button disabled={isPending} $variation="secondary" type="reset">
             Cancel
           </Button>
-          <Button disabled={pendingCreate || pedingUpdate}>
-            {isEditingSession ? "Edit Cabin" : "Create New Cabin"}
-          </Button>
+          <Button disabled={isPending}>Add Cabin</Button>
         </>
       </FormRow>
     </Form>
