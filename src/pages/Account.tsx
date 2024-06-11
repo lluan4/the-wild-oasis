@@ -1,5 +1,5 @@
-import Heading from "../components/heading/Heading";
-import Row from "../ui/Row";
+import Heading from "../shared/components/heading/Heading";
+import Row from "../shared/components/row/Row";
 
 function Account() {
   return (
