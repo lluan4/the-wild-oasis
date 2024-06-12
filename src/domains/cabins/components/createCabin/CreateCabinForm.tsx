@@ -1,6 +1,6 @@
 import { FieldErrors, useForm } from "react-hook-form";
 import { useCabins } from "../../hooks/useCabins";
-import { ICreateAndUpdateCabin } from "../../interfaces/apiCabins.interfaces";
+import { ICreateAndUpdateCabin } from "../../interfaces/IApiCabins.interfaces";
 import { ICreateCabinsFormProps } from "./CreateCabinForm.interface";
 import {
   Button,

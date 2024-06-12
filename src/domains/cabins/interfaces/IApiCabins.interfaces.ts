@@ -1,7 +1,7 @@
 import { IBase } from "../../../shared/interfaces/IBase";
 
 export interface ICreateAndUpdateCabin {
-  name: number;
+  name: string;
   maxCapacity: number;
   regularPrice: number;
   discount: number;

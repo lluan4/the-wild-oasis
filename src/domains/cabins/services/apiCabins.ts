@@ -4,7 +4,7 @@ import { generateImageName } from "../../../shared/utils/helpers";
 import {
   ICreateAndUpdateCabin,
   IGetAllCabin,
-} from "../interfaces/apiCabins.interfaces";
+} from "../interfaces/IApiCabins.interfaces";
 
 const BASE_IMAGE_URL =
   "https://beubesxdvxybcyjkfemt.supabase.co/storage/v1/object/public/cabins-images/";
@@ -29,10 +29,12 @@ export async function DeleteCabin(cabinId: number) {
 
 export async function CreateCabin(form: ICreateAndUpdateCabin) {
   // https://beubesxdvxybcyjkfemt.supabase.co/storage/v1/object/public/cabins-images/cabin-001.jpg
-
-  if (typeof form.image === "string") throw new Error("Image invalid");
-  const imageName = generateImageName(form.image?.item(0)?.name);
-  const filePath = `${BASE_IMAGE_URL}/${imageName}`;
+  let filePath = form.image;
+  let imageName = "";
+  if (typeof form.image !== "string") {
+    imageName = generateImageName(form.image?.item(0)?.name);
+    filePath = `${BASE_IMAGE_URL}/${imageName}`;
+  }
 
   const obj = {
     ...form,
@@ -50,20 +52,21 @@ export async function CreateCabin(form: ICreateAndUpdateCabin) {
     throw new Error("Cabin could not be created");
   }
 
-  if (typeof form.image === "string" || typeof form.image === "undefined")
-    throw new Error("Image invalid");
+  if (typeof form.image === "undefined") throw new Error("Image invalid");
 
-  const storageError = await requestUploadoPhoto(
-    imageName,
-    form.image[0] as File
-  );
-
-  if (storageError) {
-    DeleteCabin(data.at(0).id);
-    console.error(storageError);
-    throw new Error(
-      "Cabin image could not be uploaded and and the cabin was not created"
+  if (imageName !== "") {
+    const storageError = await requestUploadoPhoto(
+      imageName,
+      form.image[0] as File
     );
+
+    if (storageError) {
+      DeleteCabin(data.at(0).id);
+      console.error(storageError);
+      throw new Error(
+        "Cabin image could not be uploaded and and the cabin was not created"
+      );
+    }
   }
 
   return data;

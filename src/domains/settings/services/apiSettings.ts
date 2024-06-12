@@ -1,7 +1,13 @@
-import supabase from "./supabase";
+import { PostgrestMaybeSingleResponse } from "@supabase/supabase-js";
+import supabase from "../../../shared/services/supabase";
+import {
+  IApiGetAllSetting,
+  IApiRequestUpdateSetting,
+} from "../interfaces/IApiSettings.interfaces";
 
-export async function getSettings() {
-  const { data, error } = await supabase.from("settings").select("*").single();
+export async function GetAllSettings() {
+  const { data, error }: PostgrestMaybeSingleResponse<IApiGetAllSetting> =
+    await supabase.from("settings").select("*").single();
 
   if (error) {
     console.error(error);
@@ -11,7 +17,7 @@ export async function getSettings() {
 }
 
 // We expect a newSetting object that looks like {setting: newValue}
-export async function updateSetting(newSetting) {
+export async function UpdateSettings(newSetting: IApiRequestUpdateSetting) {
   const { data, error } = await supabase
     .from("settings")
     .update(newSetting)

@@ -1,7 +1,14 @@
+import { Row } from "../../shared/components";
 import Heading from "../../shared/components/heading/Heading";
+import UpdateSettingsForm from "./components/UpdateSettingsForm";
 
 function Settings() {
-  return <Heading as="h1">Update hotel settings</Heading>;
+  return (
+    <Row>
+      <Heading as="h1">Update hotel settings</Heading>
+      <UpdateSettingsForm />
+    </Row>
+  );
 }
 
 export default Settings;

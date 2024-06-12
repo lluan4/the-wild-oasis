@@ -1,4 +1,4 @@
-import { IGetAllCabin } from "../../interfaces/apiCabins.interfaces";
+import { IGetAllCabin } from "../../interfaces/IApiCabins.interfaces";
 
 export interface ICabinRowProps {
   cabin: IGetAllCabin;
