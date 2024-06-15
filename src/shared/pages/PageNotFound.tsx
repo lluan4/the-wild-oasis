@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Heading } from "../components/heading/Heading.styles";
+import { Heading } from "../styles/SHeading";
 import { useMoveBack } from "../hooks/useMoveBack";
 
 const StyledPageNotFound = styled.main`

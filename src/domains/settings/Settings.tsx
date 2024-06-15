@@ -1,5 +1,5 @@
-import { Row } from "../../shared/components";
-import Heading from "../../shared/components/heading/Heading";
+import { Heading, Row } from "../../shared/components";
+
 import UpdateSettingsForm from "./components/UpdateSettingsForm";
 
 function Settings() {

@@ -1,5 +1,4 @@
-import Heading from "../../shared/components/heading/Heading";
-import Row from "../../shared/components/row/Row";
+import { Heading, Row } from "../../shared/components";
 
 function Dashboard() {
   return (
