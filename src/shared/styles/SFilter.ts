@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
+import { IFilterButtonProps } from "../interfaces/IFilter";
 
-const StyledFilter = styled.div`
+export const StyledFilter = styled.div`
   border: 1px solid var(--color-grey-100);
   background-color: var(--color-grey-0);
   box-shadow: var(--shadow-sm);
@@ -10,12 +11,12 @@ const StyledFilter = styled.div`
   gap: 0.4rem;
 `;
 
-const FilterButton = styled.button`
+export const FilterButton = styled.button<IFilterButtonProps>`
   background-color: var(--color-grey-0);
   border: none;
 
   ${(props) =>
-    props.active &&
+    props.$active &&
     css`
       background-color: var(--color-brand-600);
       color: var(--color-brand-50);

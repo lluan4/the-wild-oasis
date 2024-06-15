@@ -16,7 +16,7 @@ import {
   IOpenProps,
   WindowProps,
 } from "../interfaces/IModal";
-import useClickOutside from "../hooks/useClickOutside";
+import useOutsideClick from "../hooks/useClickOutside";
 
 const ModalContext = createContext<IModalContextProps | null>(null);
 
@@ -53,7 +53,7 @@ function Open({ children, opens: opensWindowName }: IOpenProps): ReactElement {
 
 function Window({ children, name }: WindowProps): ReactElement | null {
   const { openName, close } = useGetModalContext();
-  const ref = useClickOutside({ handler: close });
+  const ref = useOutsideClick<HTMLDivElement>(close);
   // useEffect(() => {
   //   function handleClick(event: MouseEvent) {
   //     if (ref.current && !ref.current.contains(event.target as Node)) {

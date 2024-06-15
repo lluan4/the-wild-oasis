@@ -32,23 +32,27 @@ function Table({ columns, children }: ITableProps) {
 function Header({ children }: Omit<ITableHeaderProps, "columns">) {
   const { columns } = useGetTableContext();
   return (
-    <S.StyledHeader role="row" columns={columns} as="header">
-      {children}
+    <S.StyledHeader role="row" as="thead">
+      <S.CommonRow $columns={columns} as="tr">
+        {children}
+      </S.CommonRow>
     </S.StyledHeader>
   );
 }
-function Row({ children }: Omit<ITableCommonRowProps, "columns">) {
+function Row({ children }: Omit<ITableCommonRowProps, "$columns">) {
   const { columns } = useGetTableContext();
   return (
-    <S.StyledRow role="row" columns={columns}>
-      {children}
-    </S.StyledRow>
+    <tr>
+      <S.StyledRow role="row" as="td" $columns={columns}>
+        {children}
+      </S.StyledRow>
+    </tr>
   );
 }
 function Body<T>({ data, render }: ITableBodyProps<T>) {
   if (!data.length) return <p>No data to show at this moment</p>;
 
-  return <S.StyledBody className="chatgpt">{data.map(render)}</S.StyledBody>;
+  return <S.StyledBody as="tbody">{data.map(render)}</S.StyledBody>;
 }
 
 Table.Header = Header;

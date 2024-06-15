@@ -1,12 +1,13 @@
 import styled from "styled-components";
+import { IMenusStyledListProps } from "../interfaces/IMenus";
 
-const StyledMenu = styled.div`
+export const StyledMenu = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
 `;
 
-const StyledToggle = styled.button`
+export const StyledToggle = styled.button`
   background: none;
   border: none;
   padding: 0.4rem;
@@ -25,18 +26,18 @@ const StyledToggle = styled.button`
   }
 `;
 
-const StyledList = styled.ul`
+export const StyledList = styled.ul<IMenusStyledListProps>`
   position: fixed;
 
   background-color: var(--color-grey-0);
   box-shadow: var(--shadow-md);
   border-radius: var(--border-radius-md);
 
-  right: ${(props) => props.position.x}px;
-  top: ${(props) => props.position.y}px;
+  right: ${(props) => props.$position.x}px;
+  top: ${(props) => props.$position.y}px;
 `;
 
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
   width: 100%;
   text-align: left;
   background: none;

@@ -17,7 +17,7 @@ export interface ITableBodyProps<T> extends HTMLAttributes<HTMLDivElement> {
 
 export interface ITableCommonRowProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
-  columns: string;
+  $columns: string;
 }
 
 export interface ITableContext {

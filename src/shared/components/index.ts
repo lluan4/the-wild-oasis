@@ -17,3 +17,6 @@ export { default as Spinner } from "./Spinner";
 export { default as TextArea } from "./TextArea";
 export { default as Modal } from "./Modal";
 export { default as Table } from "./Table";
+export { default as Menus } from "./Menus";
+export { default as Filter } from "./Filter";
+export { default as TableOperations } from "./TableOperations";

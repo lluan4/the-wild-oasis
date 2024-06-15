@@ -16,17 +16,21 @@ export const StyledTable = styled.div<
   overflow: hidden;
 `;
 
+export const TableData = styled.div``;
+
 export const CommonRow = styled.div<ITableCommonRowProps>`
   display: grid;
-  grid-template-columns: ${(props) => props.columns};
+  grid-template-columns: ${(props) => props.$columns};
   column-gap: 2.4rem;
   align-items: center;
   transition: none;
 `;
 
-export const StyledHeader = styled(CommonRow)<ITableHeaderProps>`
+export const StyledHeader = styled.div`
+  display: grid;
+  align-items: center;
+  transition: none;
   padding: 1.6rem 2.4rem;
-
   background-color: var(--color-grey-50);
   border-bottom: 1px solid var(--color-grey-100);
   text-transform: uppercase;
@@ -37,7 +41,7 @@ export const StyledHeader = styled(CommonRow)<ITableHeaderProps>`
 
 export const StyledRow = styled(CommonRow)`
   padding: 1.2rem 2.4rem;
-
+  text-align: left;
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-grey-100);
   }
