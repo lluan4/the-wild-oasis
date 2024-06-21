@@ -1,15 +1,15 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
-import Dashboard from "../domains/dashboard/Dashboard";
-import Bookings from "../domains/bookings/Bookings";
+import Dashboard from '../features/dashboard/Dashboard';
+import Bookings from '../features/bookings/Bookings';
 
-import NewUsers from "../pages/Users";
-import Settings from "../domains/settings/Settings";
-import Account from "../pages/Account";
-import Login from "../pages/Login";
-import PageNotFound from "../shared/pages/PageNotFound";
-import AppLayout from "../shared/components/AppLayout";
-import Cabins from "../domains/cabins/Cabins";
+import NewUsers from '../pages/Users';
+import Settings from '../features/settings/Settings';
+import Account from '../pages/Account';
+import Login from '../pages/Login';
+import PageNotFound from '../shared/pages/PageNotFound';
+import AppLayout from '../shared/components/appLayout/AppLayout';
+import Cabins from '../features/cabins/Cabins';
 
 function AppRouter() {
   return (
