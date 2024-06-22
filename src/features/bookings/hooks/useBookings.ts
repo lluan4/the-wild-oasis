@@ -29,7 +29,7 @@ export function useBookings() {
 
     //QUERY
     const {
-      isLoading: isLoadingBookings,
+      isPending: isLoadingBookings,
       data,
       error: bookingsError,
     } = useQuery({
