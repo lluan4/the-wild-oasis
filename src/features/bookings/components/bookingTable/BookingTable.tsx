@@ -1,12 +1,18 @@
-import { Empty, Menus, Spinner, Table } from '../../../../shared/components';
+import {
+  Empty,
+  Menus,
+  Pagination,
+  Spinner,
+  Table,
+} from '../../../../shared/components';
 import useBookings from '../../hooks/useBookings';
 
 import BookingRow from '../bookingRow/BookingRow';
 
 function BookingTable() {
   const { useGetAllBookings } = useBookings();
-  const { bookings, isLoadingBookings } = useGetAllBookings();
-  console.log('bookings', bookings);
+  const { bookings, isLoadingBookings, count } = useGetAllBookings();
+
   if (bookings === undefined || !bookings.length)
     return <Empty resource="bookings" />;
 
@@ -30,6 +36,10 @@ function BookingTable() {
             <BookingRow key={booking.id} booking={booking} />
           )}
         />
+
+        <Table.Footer>
+          <Pagination count={count} />
+        </Table.Footer>
       </Table>
     </Menus>
   );

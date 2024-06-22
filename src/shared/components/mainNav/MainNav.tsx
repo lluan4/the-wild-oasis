@@ -16,7 +16,7 @@ function MainNav() {
             <HiOutlineHome />
             <span>Home</span>
           </S.Link>
-          <S.Link to="/bookings">
+          <S.Link to="/bookings?status=all">
             <HiOutlineCalendarDays />
             <span>Bookings</span>
           </S.Link>

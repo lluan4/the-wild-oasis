@@ -1,5 +1,6 @@
 import Logo from '../logo/Logo';
 import MainNav from '../mainNav/MainNav';
+import Uploader from '../uploader/Uploader';
 import * as S from './SideBar.styles';
 
 function SideBar() {
@@ -7,6 +8,7 @@ function SideBar() {
     <S.SideBar>
       <Logo />
       <MainNav />
+      <Uploader />
     </S.SideBar>
   );
 }

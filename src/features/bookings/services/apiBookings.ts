@@ -1,14 +1,43 @@
 import { getToday } from '../../../shared/utils/helpers';
 import supabase from '../../../shared/services/supabase';
 import * as I from '../interfaces/ApiBookings.interface';
+import { PAGE_SIZE } from '../../../shared/utils/constants';
 
-export async function GetAllBookings(): Promise<I.ApiBookingsCabinsGuests[]> {
+export async function GetAllBookings({
+  filter: { method = 'eq', ...filter },
+  sortBy,
+  page,
+}: {
+  filter: { field: string; value: string; method?: string };
+  sortBy: { field: string; direction: string };
+  page: number;
+}): Promise<I.IApiBookingsResponse> {
   try {
-    const { data, error } = await supabase
+    let query = supabase
       .from('bookings')
       .select(
-        'id, created_at, startDate, endDate, numNights, numGuests, status, totalPrice, cabins(name), guests(fullName, email)'
+        'id, created_at, startDate, endDate, numNights, numGuests, status, totalPrice, cabins(name), guests(fullName, email)',
+        { count: 'exact' }
       );
+
+    //FILTER
+    if (filter.value !== 'all')
+      query = (query as any)[method](filter.field, filter.value);
+
+    //SORT
+    query = query.order(sortBy.field, {
+      ascending: sortBy.direction === 'asc',
+    });
+
+    //PAGINATION
+    if (page) {
+      const from = (page - 1) * (PAGE_SIZE - 1);
+      const to = from + PAGE_SIZE - 1;
+      query = query.range(from, to);
+    }
+
+    const { data, error, count } = await query;
+
     if (error) {
       console.error('Error fetching bookings:', error);
       throw new Error('Booking could not be loaded');
@@ -19,9 +48,10 @@ export async function GetAllBookings(): Promise<I.ApiBookingsCabinsGuests[]> {
     }
 
     // @ts-expect-error: Disable type checking for the next line
-    return data as I.ApiBookingsCabinsGuests[];
+    return { data: data as I.ApiBookingsCabinsGuests, count: count as number };
   } catch (error) {
-    return [];
+    console.error('Error in GetAllBookings:', error);
+    return { data: [], count: 0 };
   }
 }
 

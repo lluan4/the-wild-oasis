@@ -28,11 +28,18 @@ export interface ApiBookingsCabinsGuests
     | 'status'
     | 'totalPrice'
   > {
-  cabins: {
-    name: string;
+  data: {
+    cabins: {
+      name: string;
+    };
+    guests: {
+      email: string;
+      fullName: string;
+    };
   };
-  guests: {
-    email: string;
-    fullName: string;
-  };
+}
+
+export interface IApiBookingsResponse {
+  data: ApiBookingsCabinsGuests[];
+  count: number;
 }

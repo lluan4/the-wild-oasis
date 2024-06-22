@@ -1,15 +1,14 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import Dashboard from '../features/dashboard/Dashboard';
-import Bookings from '../features/bookings/Bookings';
-
 import NewUsers from '../pages/Users';
 import Settings from '../features/settings/Settings';
 import Account from '../pages/Account';
 import Login from '../pages/Login';
 import PageNotFound from '../shared/pages/PageNotFound';
 import AppLayout from '../shared/components/appLayout/AppLayout';
-import Cabins from '../features/cabins/Cabins';
+import Bookings from '../features/bookings/page/Bookings';
+import Cabins from '../features/cabins/page/Cabins';
 
 function AppRouter() {
   return (

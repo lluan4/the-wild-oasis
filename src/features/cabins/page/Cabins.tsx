@@ -1,5 +1,5 @@
-import { Heading, Row } from "../../shared/components";
-import { AddCabin, CabinTable, CabinTableOperations } from "./components";
+import { Heading, Row } from '../../../shared/components';
+import { AddCabin, CabinTable, CabinTableOperations } from '../components';
 
 function Cabins() {
   return (
