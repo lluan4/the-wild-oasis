@@ -1,9 +1,16 @@
-import BookingRow from "./BookingRow";
-import Table from "../../../ui/Table";
-import Menus from "../../../ui/Menus";
+import { Empty, Menus, Spinner, Table } from '../../../../shared/components';
+import useBookings from '../../hooks/useBookings';
+
+import BookingRow from '../bookingRow/BookingRow';
 
 function BookingTable() {
-  const bookings = [];
+  const { useGetAllBookings } = useBookings();
+  const { bookings, isLoadingBookings } = useGetAllBookings();
+  console.log('bookings', bookings);
+  if (bookings === undefined || !bookings.length)
+    return <Empty resource="bookings" />;
+
+  if (isLoadingBookings) return <Spinner />;
 
   return (
     <Menus>
