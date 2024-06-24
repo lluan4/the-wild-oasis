@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { GetAllBookings } from '../services/apiBookings';
-import { useSearchParams } from 'react-router-dom';
+import { GetAllBookings, GetBooking } from '../services/apiBookings';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 export function useBookings() {
   // const queryClient = useQueryClient();
@@ -39,7 +39,23 @@ export function useBookings() {
     return { isLoadingBookings, bookings, count, bookingsError };
   }
 
-  return { useGetAllBookings };
+  function useGetBooking() {
+    const { bookingId } = useParams();
+
+    const {
+      isLoading,
+      data: booking,
+      error,
+    } = useQuery({
+      queryKey: ['booking'],
+      queryFn: () => GetBooking(Number(bookingId)),
+      retry: false,
+    });
+    console.log(booking);
+    console.log(error);
+    return { isLoading, booking, error };
+  }
+  return { useGetAllBookings, useGetBooking };
 }
 
 export default useBookings;

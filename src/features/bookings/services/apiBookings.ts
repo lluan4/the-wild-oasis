@@ -36,7 +36,8 @@ export async function GetAllBookings({
       query = query.range(from, to);
     }
 
-    const { data, error, count } = await query;
+    const { data, error, count } =
+      await query.returns<I.ApiBookingsCabinsGuests>();
 
     if (error) {
       console.error('Error fetching bookings:', error);
@@ -47,15 +48,14 @@ export async function GetAllBookings({
       throw new Error('Invalid data format received');
     }
 
-    // @ts-expect-error: Disable type checking for the next line
-    return { data: data as I.ApiBookingsCabinsGuests, count: count as number };
+    return { data: data, count: count as number };
   } catch (error) {
     console.error('Error in GetAllBookings:', error);
     return { data: [], count: 0 };
   }
 }
 
-export async function getBooking(id: number) {
+export async function GetBooking(id: number) {
   const { data, error } = await supabase
     .from('bookings')
     .select('*, cabins(*), guests(*)')

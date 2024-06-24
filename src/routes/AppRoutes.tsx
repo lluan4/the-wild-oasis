@@ -7,8 +7,10 @@ import Account from '../pages/Account';
 import Login from '../pages/Login';
 import PageNotFound from '../shared/pages/PageNotFound';
 import AppLayout from '../shared/components/appLayout/AppLayout';
-import Bookings from '../features/bookings/page/Bookings';
+import Bookings from '../features/bookings/pages/Bookings';
 import Cabins from '../features/cabins/page/Cabins';
+import Booking from '../features/bookings/pages/Booking';
+import Checkin from '../features/check-in-out/pages/Checkin';
 
 function AppRouter() {
   return (
@@ -18,6 +20,8 @@ function AppRouter() {
           <Route index element={<Navigate replace to="dashboard" />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="bookings" element={<Bookings />} />
+          <Route path="bookings/:bookingId" element={<Booking />} />
+          <Route path="checkin/:bookingId" element={<Checkin />} />
           <Route path="cabins" element={<Cabins />} />
           <Route path="users" element={<NewUsers />} />
           <Route path="settings" element={<Settings />} />

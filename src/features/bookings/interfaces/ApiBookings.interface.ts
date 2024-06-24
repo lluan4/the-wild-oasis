@@ -28,14 +28,12 @@ export interface ApiBookingsCabinsGuests
     | 'status'
     | 'totalPrice'
   > {
-  data: {
-    cabins: {
-      name: string;
-    };
-    guests: {
-      email: string;
-      fullName: string;
-    };
+  cabins: {
+    name: string;
+  };
+  guests: {
+    email: string;
+    fullName: string;
   };
 }
 

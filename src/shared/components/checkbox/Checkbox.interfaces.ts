@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, LabelHTMLAttributes } from "react";
+import { InputHTMLAttributes, LabelHTMLAttributes, ReactNode } from 'react';
 
 export type IInputProps = InputHTMLAttributes<HTMLInputElement>;
 export type ILabelProps = LabelHTMLAttributes<HTMLLabelElement>;
@@ -8,7 +8,7 @@ export type ICheckboxProps = {
   onChange?: () => void;
   disabled?: boolean;
   id?: string;
-  children?: string;
+  children?: string | ReactNode;
   inputProps?: IInputProps;
   labelProps?: ILabelProps;
 };

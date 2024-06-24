@@ -1,11 +1,13 @@
 import * as S from './BookingRow.styles';
 import { format, isToday } from 'date-fns';
-import { Table, Tag } from '../../../../shared/components';
+import { Menus, Table, Tag } from '../../../../shared/components';
 import {
   formatCurrency,
   formatDistanceFromNow,
 } from '../../../../shared/utils/helpers';
 import { IBookingsRowProps } from '../../interfaces/BookingsProps.interface';
+import { HiArrowDownOnSquare, HiEye } from 'react-icons/hi2';
+import { useNavigate } from 'react-router-dom';
 
 type IStatusToTagName = {
   unconfirmed: string;
@@ -35,6 +37,7 @@ function BookingRow({
 
   const { fullName: guestName, email } = guests;
   const { name: cabinName } = cabins;
+  const navigate = useNavigate();
 
   return (
     <Table.Row>
@@ -61,6 +64,26 @@ function BookingRow({
       <Tag type={statusToTagName[status]}>{status.replace('-', ' ')}</Tag>
 
       <S.Amount>{formatCurrency(totalPrice)}</S.Amount>
+
+      <Menus.Menu>
+        <Menus.Toogle id={bookingId} />
+        <Menus.List id={bookingId.toString()}>
+          <Menus.Button
+            icon={<HiEye />}
+            onClick={() => navigate(`/bookings/${bookingId}`)}
+          >
+            See Details
+          </Menus.Button>
+          {status === 'unconfirmed' && (
+            <Menus.Button
+              icon={<HiArrowDownOnSquare />}
+              onClick={() => navigate(`/checkin/${bookingId}`)}
+            >
+              Check In
+            </Menus.Button>
+          )}
+        </Menus.List>
+      </Menus.Menu>
     </Table.Row>
   );
 }
