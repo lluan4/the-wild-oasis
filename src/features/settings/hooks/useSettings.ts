@@ -1,25 +1,25 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { GetAllSettings, UpdateSettings } from "../services/apiSettings";
-import toast from "react-hot-toast";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { GetAllSettings, UpdateSettings } from '../services/apiSettings';
+import toast from 'react-hot-toast';
 
 export function useSetting() {
   const queryClient = useQueryClient();
 
   function useGetAllSettings() {
     const result = useQuery({
-      queryKey: ["settings"],
+      queryKey: ['settings'],
       queryFn: GetAllSettings,
     });
     return result;
   }
 
-  function useGetUpdateSettings() {
+  function useUpdateSettings() {
     const result = useMutation({
       mutationFn: UpdateSettings,
       onSuccess: () => {
-        toast.success("Settings successfully update");
+        toast.success('Settings successfully update');
         queryClient.invalidateQueries({
-          queryKey: ["settings"],
+          queryKey: ['settings'],
         });
       },
       onError: (error) => {
@@ -30,6 +30,6 @@ export function useSetting() {
   }
   return {
     useGetAllSettings,
-    useGetUpdateSettings,
+    useGetUpdateSettings: useUpdateSettings,
   };
 }

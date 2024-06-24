@@ -1,22 +1,29 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import Dashboard from '../features/dashboard/Dashboard';
-import NewUsers from '../pages/Users';
+import NewUsers from '../features/authentication/pages/Users';
 import Settings from '../features/settings/Settings';
-import Account from '../pages/Account';
-import Login from '../pages/Login';
+import Account from '../features/authentication/pages/Account';
+import Login from '../features/authentication/pages/Login';
 import PageNotFound from '../shared/pages/PageNotFound';
 import AppLayout from '../shared/components/appLayout/AppLayout';
 import Bookings from '../features/bookings/pages/Bookings';
 import Cabins from '../features/cabins/page/Cabins';
 import Booking from '../features/bookings/pages/Booking';
 import Checkin from '../features/check-in-out/pages/Checkin';
+import { ProtectedRoute } from '../shared/components';
 
 function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<AppLayout />}>
+        <Route
+          element={
+            <ProtectedRoute>
+              <AppLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<Navigate replace to="dashboard" />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="bookings" element={<Bookings />} />

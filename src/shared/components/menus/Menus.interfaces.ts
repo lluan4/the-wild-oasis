@@ -1,5 +1,5 @@
-import { Dispatch, HTMLAttributes, ReactElement, ReactNode } from "react";
-import { IconType } from "react-icons";
+import { Dispatch, HTMLAttributes, ReactElement, ReactNode } from 'react';
+import { IconType } from 'react-icons';
 
 export interface IMenusContext {
   open: Dispatch<React.SetStateAction<string>>;
@@ -13,10 +13,11 @@ export interface IMenusProps {
   children: ReactNode;
 }
 
-export interface IMenusButtonProps {
+export interface IMenusButtonProps extends HTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   onClick?: () => void;
   icon: ReactElement<IconType>;
+  disabled?: boolean;
 }
 
 export interface IMenusToggleProps {

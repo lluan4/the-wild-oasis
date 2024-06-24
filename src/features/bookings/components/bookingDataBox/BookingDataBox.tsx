@@ -1,5 +1,5 @@
 import { format, isToday } from 'date-fns';
-import * as S from './BookingDataBox.styles';
+import * as S from '../../styles/BookingDataBox.styles';
 import {
   HiOutlineChatBubbleBottomCenterText,
   HiOutlineCheckCircle,

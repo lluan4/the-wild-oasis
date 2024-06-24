@@ -81,7 +81,7 @@ function List({ id, children }: IMenusListProps) {
   );
 }
 
-function Button({ children, onClick, icon }: IMenusButtonProps) {
+function Button({ children, onClick, icon, ...props }: IMenusButtonProps) {
   const { close } = useGetMenusContext();
   function handleClick() {
     onClick?.();
@@ -90,7 +90,7 @@ function Button({ children, onClick, icon }: IMenusButtonProps) {
 
   return (
     <li>
-      <S.StyledButton onClick={handleClick}>
+      <S.StyledButton onClick={handleClick} {...props}>
         {icon}
         <span>{children}</span>{' '}
       </S.StyledButton>

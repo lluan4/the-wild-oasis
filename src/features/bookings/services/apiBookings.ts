@@ -124,7 +124,15 @@ export async function getStaysTodayActivity() {
   return data;
 }
 
-export async function updateBooking(id: number, obj: string) {
+export async function UpdateBooking(
+  id: number,
+  obj: {
+    status?: string;
+    isPaid?: boolean;
+    extrasPrice?: number;
+    totalPrice?: number;
+  }
+) {
   const { data, error } = await supabase
     .from('bookings')
     .update(obj)
@@ -139,7 +147,7 @@ export async function updateBooking(id: number, obj: string) {
   return data;
 }
 
-export async function deleteBooking(id: number) {
+export async function DeleteBooking(id: number) {
   // REMEMBER RLS POLICIES
   const { data, error } = await supabase.from('bookings').delete().eq('id', id);
 

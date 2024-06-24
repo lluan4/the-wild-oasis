@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { IMenusStyledListProps } from './Menus.interfaces';
+import { HTMLAttributes } from 'react';
 
 export const StyledMenu = styled.div`
   display: flex;
@@ -37,7 +38,7 @@ export const StyledList = styled.ul<IMenusStyledListProps>`
   top: ${(props) => props.$position.y}px;
 `;
 
-export const StyledButton = styled.button`
+export const StyledButton = styled.button<HTMLAttributes<HTMLButtonElement>>`
   width: 100%;
   text-align: left;
   background: none;

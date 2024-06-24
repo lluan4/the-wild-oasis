@@ -3,7 +3,7 @@ import { IStyledFormProps } from './Form.interfaces';
 
 export const Form = styled.form<IStyledFormProps>`
   ${(props) =>
-    props.$variation !== 'regular' &&
+    props.$variation !== 'modal' &&
     css`
       padding: 2.4rem 4rem;
 
