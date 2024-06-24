@@ -13,10 +13,10 @@ function BookingTable() {
   const { useGetAllBookings } = useBookings();
   const { bookings, isLoadingBookings, count } = useGetAllBookings();
 
+  if (isLoadingBookings) return <Spinner />;
+
   if (bookings === undefined || !bookings.length)
     return <Empty resource="bookings" />;
-
-  if (isLoadingBookings) return <Spinner />;
 
   return (
     <Menus>
