@@ -68,8 +68,9 @@ function useAuth() {
   function useUpdateUser() {
     const { mutate: updateUser, isPending: isUpdating } = useMutation({
       mutationFn: UpdateUser,
-      onSuccess: () => {
+      onSuccess: ({ user }) => {
         toast.success('User successfully updated');
+        queryClient.setQueryData(['user'], user);
         queryClient.invalidateQueries({
           queryKey: ['user'],
         });

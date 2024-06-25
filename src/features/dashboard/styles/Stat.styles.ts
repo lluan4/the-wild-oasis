@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-const StyledStat = styled.div`
+export const StyledStat = styled.div`
   /* Box */
   background-color: var(--color-grey-0);
   border: 1px solid var(--color-grey-100);
@@ -14,7 +14,7 @@ const StyledStat = styled.div`
   row-gap: 0.4rem;
 `;
 
-const Icon = styled.div`
+export const Icon = styled.div`
   grid-row: 1 / -1;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -32,7 +32,7 @@ const Icon = styled.div`
   }
 `;
 
-const Title = styled.h5`
+export const Title = styled.h5`
   align-self: end;
   font-size: 1.2rem;
   text-transform: uppercase;
@@ -41,20 +41,8 @@ const Title = styled.h5`
   color: var(--color-grey-500);
 `;
 
-const Value = styled.p`
+export const Value = styled.p`
   font-size: 2.4rem;
   line-height: 1;
   font-weight: 500;
 `;
-
-function Stat({ icon, title, value, color }) {
-  return (
-    <StyledStat>
-      <Icon color={color}>{icon}</Icon>
-      <Title>{title}</Title>
-      <Value>{value}</Value>
-    </StyledStat>
-  );
-}
-
-export default Stat;

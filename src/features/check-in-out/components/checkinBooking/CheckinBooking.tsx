@@ -1,4 +1,4 @@
-import * as S from '../styles/CheckinBooking.styles';
+import * as S from '../../styles/CheckinBooking.styles';
 import { useMoveBack } from '../../../../shared/hooks/useMoveBack';
 import {
   Button,

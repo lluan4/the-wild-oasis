@@ -1,5 +1,8 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { UpdateBooking } from '../../bookings/services/apiBookings';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  UpdateBooking,
+  getStaysTodayActivity,
+} from '../../bookings/services/apiBookings';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
@@ -58,9 +61,19 @@ function useCheckInOut() {
     return { checkOut, isCheckOutLoading };
   }
 
+  function useTodayActivity() {
+    const { isPending: isLoadingTodayActivity, data: stays } = useQuery({
+      queryFn: getStaysTodayActivity,
+      queryKey: ['today-activity'],
+    });
+
+    return { isLoadingTodayActivity, stays };
+  }
+
   return {
     useCheckIn,
     useCheckOut,
+    useTodayActivity,
   };
 }
 
