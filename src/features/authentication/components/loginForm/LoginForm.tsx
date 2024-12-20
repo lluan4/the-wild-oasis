@@ -7,27 +7,21 @@ import {
   SpinnerMini,
 } from '../../../../shared/components';
 import useAuth from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
   const [email, setEmail] = useState('luan@example.com');
   const [password, setPassword] = useState('1020304055');
   const { useLogin } = useAuth();
   const { login, isLoadingLogin } = useLogin();
+  const navigate = useNavigate();
 
   function handleSubmit(e: any) {
     e.preventDefault();
     if (!email || !password) {
       return;
     }
-    login(
-      { email, password },
-      {
-        onSettled: () => {
-          setEmail('');
-          setPassword('');
-        },
-      }
-    );
+    navigate('/dashboard');
   }
 
   return (
