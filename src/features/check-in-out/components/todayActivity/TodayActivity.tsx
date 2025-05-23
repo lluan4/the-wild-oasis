@@ -14,9 +14,9 @@ function TodayActivity() {
       </Row>
 
       {!isLoadingTodayActivity ? (
-        stays?.length > 0 ? (
+        stays?.length || 0 > 0 ? (
           <S.TodayList>
-            {stays.map((stay) => (
+            {stays?.map((stay) => (
               <TodayItem key={stay.id} activity={stay} />
             ))}
           </S.TodayList>

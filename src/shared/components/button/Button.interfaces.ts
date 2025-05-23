@@ -11,6 +11,9 @@ export interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
       >;
   $variation?: keyof typeof variations;
   $sizes?: keyof typeof sizes;
+  disabled?: boolean;
+  type?: 'reset' | 'button' | 'submit' | undefined;
+  to?: string;
 }
 
 export interface IStyledButtonProps {

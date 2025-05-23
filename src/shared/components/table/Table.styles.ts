@@ -1,9 +1,5 @@
 import styled from 'styled-components';
-import {
-  ITableCommonRowProps,
-  ITableHeaderProps,
-  ITableProps,
-} from './Table.interfaces';
+import { ITableCommonRowProps, ITableProps } from './Table.interfaces';
 
 export const StyledTable = styled.div<
   Omit<ITableProps, 'children' | 'columns'>
